@@ -1,3 +1,5 @@
-const App = () => <h1>Hello World Countries</h1>;
+import Continents from './components/continents/Continents';
+
+const App = () => <Continents />;
 
 export default App;

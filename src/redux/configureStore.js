@@ -1,22 +1,22 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
-import reducerAsia from './continents/countriesAsia';
-import reducerEurope from './continents/countriesEurope';
-import reducerOceania from './continents/countriesOceania';
-import reducerAfrica from './continents/countriesAfrica';
-import reducerSouthAmerica from './continents/countriesSouthAmerica';
-import reducerCentralAmerica from './continents/countriesCentralAmerica';
-import reducerNorthAmerica from './continents/countriesNorthAmerica';
+import asia from './continents/countriesAsia';
+import europe from './continents/countriesEurope';
+import oceania from './continents/countriesOceania';
+import africa from './continents/countriesAfrica';
+import southAmerica from './continents/countriesSouthAmerica';
+import centralAmerica from './continents/countriesCentralAmerica';
+import northAmerica from './continents/countriesNorthAmerica';
 
 const reducer = combineReducers({
-  reducerAsia,
-  reducerEurope,
-  reducerOceania,
-  reducerAfrica,
-  reducerSouthAmerica,
-  reducerCentralAmerica,
-  reducerNorthAmerica,
+  asia,
+  europe,
+  oceania,
+  africa,
+  southAmerica,
+  centralAmerica,
+  northAmerica,
 });
 
 const store = createStore(reducer, applyMiddleware(thunk, logger));

@@ -29,14 +29,13 @@ const Continents = () => {
     continNames.push(keys);
   });
 
-  const correctNames = (arr) =>
-    continNamesCorrect.push(
-      arr.map((el) => {
-        const result = el.replace(/([A-Z])/g, ' $1');
-        const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
-        return continNamesCorrect.push(finalResult);
-      }),
-    );
+  const correctNames = (arr) => continNamesCorrect.push(
+    arr.map((el) => {
+      const result = el.replace(/([A-Z])/g, ' $1');
+      const finalResult = result.charAt(0).toUpperCase() + result.slice(1);
+      return continNamesCorrect.push(finalResult);
+    }),
+  );
 
   correctNames(continNames);
 
@@ -46,7 +45,11 @@ const Continents = () => {
         {continArr.map((continent, index) => (
           <li key={Math.random()}>
             <Link to="/countries">
-              {continNamesCorrect[index]}: {continent.length}
+              {continNamesCorrect[index]}
+              :
+              {' '}
+              {continent.length}
+
             </Link>
           </li>
         ))}

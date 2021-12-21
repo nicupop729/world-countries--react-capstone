@@ -13,14 +13,13 @@ const Countries = ({ countries, onSetCountry }) => {
 
   return (
     <div>
-      <h1>let see</h1>
       <ul>
         {countries.map((country) => (
           <li key={uuidv4()}>
             <Link to="/country" onClick={showCountry}>
               <h1>{country.name.common}</h1>
-              <img src={country.flags.png} alt="country-flag" />
             </Link>
+            <img src={country.flags.png} alt="country-flag" />
           </li>
         ))}
       </ul>

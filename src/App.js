@@ -24,8 +24,8 @@ const App = () => {
       </header>
       <Routes>
         <Route exact path="/" element={<Continents onSetCountries={handlerSetCountries} />} />
-        <Route exact path="/countries" element={<Countries continents={countries} onSetCountry={handlerSetCountry} />} />
-        <Route exact path="/country" element={<Country countries={country} />} />
+        <Route exact path="/countries" element={<Countries countries={countries} onSetCountry={handlerSetCountry} />} />
+        <Route exact path="/country" element={<Country country={country} />} />
       </Routes>
     </div>
   );

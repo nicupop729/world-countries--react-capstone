@@ -1,11 +1,13 @@
+/* eslint-disable react/prop-types */
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
+import { v4 as uuidv4 } from 'uuid';
 import fetchContinentCountries from '../../redux/apiCall';
 import './continents.css';
 
-const Continents = () => {
+const Continents = ({ onSetCountries }) => {
   const continArr = [];
   const continNames = [];
   const continNamesCorrect = [];
@@ -39,18 +41,28 @@ const Continents = () => {
 
   correctNames(continNames);
 
+  const prepareCountries = (string) => {
+    const result = string.split(' ').join('');
+    const finalResult = result[0].toLowerCase() + result.slice(1);
+    return finalResult;
+  };
+
+  const showCountries = (e) => {
+    // eslint-disable-next-line max-len
+    const setCountries = _.pickBy(continents, (value, key) => key === prepareCountries(e.target.textContent));
+    const finalCountries = Object.values(setCountries);
+    onSetCountries(...finalCountries);
+  };
+
   return (
     <div>
       <ul>
         {continArr.map((continent, index) => (
-          <li key={Math.random()}>
-            <Link to="/countries">
-              {continNamesCorrect[index]}
-              :
-              {' '}
-              {continent.length}
-
+          <li key={uuidv4()}>
+            <Link to="/countries" onClick={showCountries}>
+              <p name="continent">{continNamesCorrect[index]}</p>
             </Link>
+            <h2>{continent.length}</h2>
           </li>
         ))}
       </ul>

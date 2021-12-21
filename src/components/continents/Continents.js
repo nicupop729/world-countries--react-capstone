@@ -32,12 +32,12 @@ const Continents = () => {
   console.log('Asia: ', countriesAsia.length);
   console.log('Europe: ', countriesEurope.length);
   console.log('Oceania: ', countriesOceania.length);
-  console.log('Africa: ', countriesAfrica.length);
+  console.log('Africa: ', countriesAfrica);
   console.log('South America: ', countriesSouthAmerica.length);
   console.log('Central America: ', countriesCentralAmerica.length);
   console.log('North America: ', countriesNorthAmerica.length);
 
-  return <h1>Hello World Countries</h1>;
+  return <h1>Hello world</h1>;
 };
 
 export default Continents;

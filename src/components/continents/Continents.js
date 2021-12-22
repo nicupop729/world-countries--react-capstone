@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 import fetchContinentCountries from '../../redux/apiCall';
 import './continents.css';
 
-const Continents = ({ onSetCountries }) => {
+const Continents = ({ searchCountry, onSetCountries, onSetCountry }) => {
   const continArr = [];
   const continNames = [];
   const continNamesCorrect = [];
@@ -54,18 +54,41 @@ const Continents = ({ onSetCountries }) => {
     onSetCountries(...finalCountries);
   };
 
+  const showCountry = (e) => {
+    const setCountry = searchCountry.filter(
+      (country) => country.name.common === e.target.textContent,
+    );
+    const finalCountry = setCountry[0];
+    onSetCountry(finalCountry);
+  };
+
+  console.log(searchCountry);
+
   return (
     <div>
-      <ul>
-        {continArr.map((continent, index) => (
-          <li key={uuidv4()}>
-            <Link to="/countries" onClick={showCountries}>
-              <p name="continent">{continNamesCorrect[index]}</p>
-            </Link>
-            <h2>{continent.length}</h2>
-          </li>
-        ))}
-      </ul>
+      {searchCountry.length ? (
+        <ul>
+          {searchCountry.map((country) => (
+            <li key={uuidv4()}>
+              <Link to="/countries/country" onClick={showCountry}>
+                <h1>{country.name.common}</h1>
+              </Link>
+              <img src={country.flags.png} alt="country-flag" />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <ul>
+          {continArr.map((continent, index) => (
+            <li key={uuidv4()}>
+              <Link to="/countries" onClick={showCountries}>
+                <p name="continent">{continNamesCorrect[index]}</p>
+              </Link>
+              <h2>{continent.length}</h2>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

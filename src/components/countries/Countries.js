@@ -16,7 +16,7 @@ const Countries = ({ countries, onSetCountry }) => {
       <ul>
         {countries.map((country) => (
           <li key={uuidv4()}>
-            <Link to="/country" onClick={showCountry}>
+            <Link to="/countries/country" onClick={showCountry}>
               <h1>{country.name.common}</h1>
             </Link>
             <img src={country.flags.png} alt="country-flag" />

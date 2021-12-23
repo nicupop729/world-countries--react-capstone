@@ -6,8 +6,11 @@ import _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import fetchContinentCountries from '../../redux/apiCall';
 import './continents.css';
+import worldMap from '../../assets/wrld-17.svg';
 
-const Continents = ({ searchCountry, onSetCountries, onSetCountry }) => {
+const Continents = ({
+  searchCountry, onSetCountries, onSetCountry, onSetSearchEmpty,
+}) => {
   const continArr = [];
   const continNames = [];
   const continNamesCorrect = [];
@@ -49,9 +52,10 @@ const Continents = ({ searchCountry, onSetCountries, onSetCountry }) => {
 
   const showCountries = (e) => {
     // eslint-disable-next-line max-len
-    const setCountries = _.pickBy(continents, (value, key) => key === prepareCountries(e.target.textContent));
+    const setCountries = _.pickBy(continents, (_, key) => key === prepareCountries(e.target.textContent));
     const finalCountries = Object.values(setCountries);
     onSetCountries(...finalCountries);
+    onSetSearchEmpty([]);
   };
 
   const showCountry = (e) => {
@@ -62,11 +66,10 @@ const Continents = ({ searchCountry, onSetCountries, onSetCountry }) => {
     onSetCountry(finalCountry);
   };
 
-  console.log(searchCountry);
-
   return (
-    <div>
-      {searchCountry.length ? (
+    <div className="Continents">
+      <img className="Continents__img" src={worldMap} alt="world-map" />
+      {searchCountry.length && searchCountry.length !== 195 ? (
         <ul>
           {searchCountry.map((country) => (
             <li key={uuidv4()}>
@@ -78,9 +81,9 @@ const Continents = ({ searchCountry, onSetCountries, onSetCountry }) => {
           ))}
         </ul>
       ) : (
-        <ul>
+        <ul className="Continents__list">
           {continArr.map((continent, index) => (
-            <li key={uuidv4()}>
+            <li key={uuidv4()} className="Continents__list_items">
               <Link to="/countries" onClick={showCountries}>
                 <p name="continent">{continNamesCorrect[index]}</p>
               </Link>

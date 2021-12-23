@@ -9,7 +9,7 @@ import './continents.css';
 import worldMap from '../../assets/wrld-17.svg';
 
 const Continents = ({
-  searchCountry, onSetCountries, onSetCountry, onSetSearchEmpty,
+  searchCountry, onSetCountries, onSetCountry, onSetSearchEmpty, onSetContinentMap,
 }) => {
   const continArr = [];
   const continNames = [];
@@ -55,6 +55,7 @@ const Continents = ({
     const setCountries = _.pickBy(continents, (_, key) => key === prepareCountries(e.target.textContent));
     const finalCountries = Object.values(setCountries);
     onSetCountries(...finalCountries);
+    onSetContinentMap(prepareCountries(e.target.textContent));
     onSetSearchEmpty([]);
   };
 
@@ -84,10 +85,10 @@ const Continents = ({
         <ul className="Continents__list">
           {continArr.map((continent, index) => (
             <li key={uuidv4()} className="Continents__list_items">
-              <Link to="/countries" onClick={showCountries}>
+              <Link to="/countries" onClick={showCountries} className="Continents__list_items_name">
                 <p name="continent">{continNamesCorrect[index]}</p>
               </Link>
-              <h2>{continent.length}</h2>
+              <p>{continent.length}</p>
             </li>
           ))}
         </ul>

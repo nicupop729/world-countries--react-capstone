@@ -10,6 +10,7 @@ const App = () => {
   const [countries, setCountries] = useState('');
   const [country, setCountry] = useState('');
   const [searchCountry, setSearchCountry] = useState('');
+  const [continentMap, setContinentMap] = useState('');
 
   const handlerSetCountries = (countriesName) => {
     setCountries(countriesName);
@@ -27,12 +28,16 @@ const App = () => {
     setSearchCountry(value);
   };
 
+  const handlerSetContinentMap = (value) => {
+    setContinentMap(value);
+  };
+
   return (
     <div className="App">
       <Header onSearchCountry={handlerSearchCountry} />
       <Routes>
-        <Route exact path="/" element={<Continents searchCountry={searchCountry} onSetCountries={handlerSetCountries} onSetCountry={handlerSetCountry} onSetSearchEmpty={handlerSetSearchEmpty} />} />
-        <Route exact path="/countries" element={<Countries searchCountry={searchCountry} countries={countries} onSetCountry={handlerSetCountry} onSetSearchEmpty={handlerSetSearchEmpty} />} />
+        <Route exact path="/" element={<Continents searchCountry={searchCountry} onSetCountries={handlerSetCountries} onSetCountry={handlerSetCountry} onSetSearchEmpty={handlerSetSearchEmpty} onSetContinentMap={handlerSetContinentMap} />} />
+        <Route exact path="/countries" element={<Countries searchCountry={searchCountry} countries={countries} onSetCountry={handlerSetCountry} onSetSearchEmpty={handlerSetSearchEmpty} continentMap={continentMap} />} />
         <Route exact path="/countries/country" element={<Country searchCountry={searchCountry} country={country} onSetCountry={handlerSetCountry} onSetSearchEmpty={handlerSetSearchEmpty} />} />
       </Routes>
     </div>

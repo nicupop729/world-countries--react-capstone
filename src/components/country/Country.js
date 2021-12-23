@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
-import { Link } from 'react-router-dom';
+import DisplayCountries from '../countries/DisplayCountries';
 import './country.css';
 
 const Country = ({
@@ -18,16 +18,7 @@ const Country = ({
   return (
     <div>
       {searchCountry.length && searchCountry.length !== 195 ? (
-        <ul>
-          {searchCountry.map((country) => (
-            <li key={uuidv4()}>
-              <Link to="/countries/country" onClick={showCountryFiltered}>
-                <h1>{country.name.common}</h1>
-              </Link>
-              <img src={country.flags.png} alt="country-flag" />
-            </li>
-          ))}
-        </ul>
+        <DisplayCountries name={searchCountry} showCountry={showCountryFiltered} />
       ) : (
         <div className="Country">
           <img className="Country__flag" src={country.flags.png} alt="country-flag" />
@@ -71,4 +62,16 @@ const Country = ({
     </div>
   );
 };
+
+Country.propTypes = {
+  searchCountry: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
+  country: PropTypes.instanceOf(Object).isRequired,
+  onSetCountry: PropTypes.func.isRequired,
+  onSetSearchEmpty: PropTypes.func.isRequired,
+};
+
+Country.defaultProps = {
+  searchCountry: [],
+};
+
 export default Country;

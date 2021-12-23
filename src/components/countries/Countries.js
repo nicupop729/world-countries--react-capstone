@@ -1,7 +1,5 @@
-/* eslint-disable react/prop-types */
-import { v4 as uuidv4 } from 'uuid';
-import { Link } from 'react-router-dom';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 import europeMap from '../../assets/map_of_Europe.svg.png';
 import asiaMap from '../../assets/map_Asia.svg.png';
 import africaMap from '../../assets/map-Africa.svg.png';
@@ -10,6 +8,7 @@ import northAmericaMap from '../../assets/map-North_America-Subdivisions.svg.png
 import centralAmericaMap from '../../assets/map_America_Central-color.svg.png';
 import southAmericaMap from '../../assets/map_of_South_America.svg.png';
 import './countries.css';
+import DisplayCountries from './DisplayCountries';
 
 const Countries = ({
   searchCountry,
@@ -40,16 +39,7 @@ const Countries = ({
   return (
     <div>
       {searchCountry.length && searchCountry.length !== 195 ? (
-        <ul>
-          {searchCountry.map((country) => (
-            <li key={uuidv4()}>
-              <Link to="/countries/country" onClick={showCountryFiltered}>
-                <h1>{country.name.common}</h1>
-              </Link>
-              <img src={country.flags.png} alt="country-flag" />
-            </li>
-          ))}
-        </ul>
+        <DisplayCountries name={searchCountry} showCountry={showCountryFiltered} />
       ) : (
         <div className="Countries">
           {continentMap === 'europe' ? <img className="continent_map" src={europeMap} alt="europe map" /> : null}
@@ -59,19 +49,24 @@ const Countries = ({
           {continentMap === 'northAmerica' ? <img className="continent_map" src={northAmericaMap} alt="north america map" /> : null}
           {continentMap === 'centralAmerica' ? <img className="continent_map" src={centralAmericaMap} alt="central america map" /> : null}
           {continentMap === 'southAmerica' ? <img className="continent_map" src={southAmericaMap} alt="south america map" /> : null}
-          <ul className="Countries__list">
-            {sortedCountries.map((country) => (
-              <li key={uuidv4()} className="Countries__list_items">
-                <Link to="/countries/country" onClick={showCountry}>
-                  <p>{country.name.common}</p>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <DisplayCountries name={sortedCountries} showCountry={showCountry} />
         </div>
       )}
     </div>
   );
+};
+
+Countries.propTypes = {
+  searchCountry: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
+  countries: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
+  onSetCountry: PropTypes.func.isRequired,
+  onSetSearchEmpty: PropTypes.func.isRequired,
+  continentMap: PropTypes.string.isRequired,
+};
+
+Countries.defaultProps = {
+  searchCountry: [],
+  countries: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
 };
 
 export default Countries;

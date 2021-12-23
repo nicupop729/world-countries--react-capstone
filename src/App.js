@@ -7,9 +7,9 @@ import Country from './components/country/Country';
 import './App.css';
 
 const App = () => {
-  const [countries, setCountries] = useState('');
-  const [country, setCountry] = useState('');
-  const [searchCountry, setSearchCountry] = useState('');
+  const [countries, setCountries] = useState([]);
+  const [country, setCountry] = useState([]);
+  const [searchCountry, setSearchCountry] = useState([]);
   const [continentMap, setContinentMap] = useState('');
 
   const handlerSetCountries = (countriesName) => {

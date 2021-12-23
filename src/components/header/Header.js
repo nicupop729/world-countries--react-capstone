@@ -1,6 +1,7 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import _ from 'lodash';
 import './header.css';
 
 const Header = ({ onSearchCountry }) => {
@@ -9,13 +10,14 @@ const Header = ({ onSearchCountry }) => {
   const continents = useSelector((state) => state);
 
   const countries = Object.values(continents);
-  const finalCountries = [];
-  countries.map((continent) => finalCountries.push(...continent));
+  const finalC = [];
+  countries.map((continent) => finalC.push(...continent));
 
   useEffect(() => {
-    // eslint-disable-next-line max-len
-    const searchCountry = finalCountries.filter((country) => country.name.common.toLowerCase().includes(search.toLowerCase()));
-    onSearchCountry(searchCountry);
+    const s = search.toLowerCase();
+    const searchCountry = finalC.filter((country) => country.name.common.toLowerCase().includes(s));
+    const sortedFiteredCountries = _.sortBy(searchCountry, ['name.common'], ['asc']);
+    onSearchCountry(sortedFiteredCountries);
   }, [search]);
 
   const countrySearchHandler = (e) => {
@@ -37,6 +39,10 @@ const Header = ({ onSearchCountry }) => {
       </form>
     </header>
   );
+};
+
+Header.propTypes = {
+  onSearchCountry: PropTypes.func.isRequired,
 };
 
 export default Header;

@@ -1,10 +1,11 @@
-/* eslint-disable react/prop-types */
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import fetchContinentCountries from '../../redux/apiCall';
+import DisplayCountries from '../countries/DisplayCountries';
 import './continents.css';
 import worldMap from '../../assets/wrld-17.svg';
 
@@ -51,36 +52,26 @@ const Continents = ({
   };
 
   const showCountries = (e) => {
-    // eslint-disable-next-line max-len
-    const setCountries = _.pickBy(continents, (_, key) => key === prepareCountries(e.target.textContent));
-    const finalCountries = Object.values(setCountries);
+    const setCon = _.pickBy(continents, (_, key) => key === prepareCountries(e.target.textContent));
+    const finalCountries = Object.values(setCon);
     onSetCountries(...finalCountries);
     onSetContinentMap(prepareCountries(e.target.textContent));
-    onSetSearchEmpty([]);
   };
 
-  const showCountry = (e) => {
+  const showCountryFiltered = (e) => {
     const setCountry = searchCountry.filter(
       (country) => country.name.common === e.target.textContent,
     );
     const finalCountry = setCountry[0];
     onSetCountry(finalCountry);
+    onSetSearchEmpty([]);
   };
 
   return (
     <div className="Continents">
       <img className="Continents__img" src={worldMap} alt="world-map" />
       {searchCountry.length && searchCountry.length !== 195 ? (
-        <ul>
-          {searchCountry.map((country) => (
-            <li key={uuidv4()}>
-              <Link to="/countries/country" onClick={showCountry}>
-                <h1>{country.name.common}</h1>
-              </Link>
-              <img src={country.flags.png} alt="country-flag" />
-            </li>
-          ))}
-        </ul>
+        <DisplayCountries name={searchCountry} showCountry={showCountryFiltered} />
       ) : (
         <ul className="Continents__list">
           {continArr.map((continent, index) => (
@@ -95,6 +86,18 @@ const Continents = ({
       )}
     </div>
   );
+};
+
+Continents.propTypes = {
+  searchCountry: PropTypes.instanceOf(Array),
+  onSetCountries: PropTypes.func.isRequired,
+  onSetCountry: PropTypes.func.isRequired,
+  onSetSearchEmpty: PropTypes.func.isRequired,
+  onSetContinentMap: PropTypes.func.isRequired,
+};
+
+Continents.defaultProps = {
+  searchCountry: [],
 };
 
 export default Continents;

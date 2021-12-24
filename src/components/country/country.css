@@ -1,0 +1,36 @@
+.Country {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 60rem;
+}
+
+.Country__flag {
+  width: 100%;
+}
+
+.Country__assets {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.Country__assets img {
+  width: 10rem;
+}
+
+.Country__sizes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.Country__borders_list {
+  padding-top: 1rem;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  font-size: 1.7rem;
+}

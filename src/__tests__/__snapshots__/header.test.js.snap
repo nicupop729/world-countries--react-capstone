@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot matches to snapshot 1`] = `
+<header
+  className="Header"
+>
+  <h1
+    className="Header__title"
+  >
+    World Countries
+  </h1>
+  <form>
+    <input
+      className="input-searh"
+      id="search-bar"
+      onChange={[Function]}
+      placeholder="Search country"
+      type="text"
+      value=""
+    />
+  </form>
+</header>
+`;

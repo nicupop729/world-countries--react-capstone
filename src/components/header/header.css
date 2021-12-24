@@ -1,0 +1,23 @@
+.Header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: rgb(228, 89, 146);
+}
+
+.Header__title {
+  font-size: 4rem;
+}
+
+.input-searh {
+  border: none;
+  padding: 0.5rem;
+  border-radius: 5rem;
+  width: 60vw;
+  max-width: 30rem;
+  text-align: center;
+}

@@ -1,0 +1,29 @@
+.Countries {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 60rem;
+}
+
+.continent_map {
+  width: 100%;
+  background-color: rgb(228, 89, 146);
+}
+
+.Countries__list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}
+
+.Countries__list_items {
+  height: 6rem;
+  background-color: rgb(228, 86, 135);
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+}
+
+.Countries__list_items:nth-child(2n) {
+  background-color: rgb(208, 77, 119);
+}

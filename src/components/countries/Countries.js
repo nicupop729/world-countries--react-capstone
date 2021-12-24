@@ -37,11 +37,11 @@ const Countries = ({
   const sortedCountries = _.sortBy(countries, ['name.common'], ['asc']);
 
   return (
-    <div>
+    <div className="Countries">
       {searchCountry.length && searchCountry.length !== 195 ? (
         <DisplayCountries name={searchCountry} showCountry={showCountryFiltered} />
       ) : (
-        <div className="Countries">
+        <div>
           {continentMap === 'europe' ? <img className="continent_map" src={europeMap} alt="europe map" /> : null}
           {continentMap === 'asia' ? <img className="continent_map" src={asiaMap} alt="asia map" /> : null}
           {continentMap === 'africa' ? <img className="continent_map" src={africaMap} alt="africa map" /> : null}

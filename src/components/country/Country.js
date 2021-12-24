@@ -1,11 +1,15 @@
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import DisplayCountries from '../countries/DisplayCountries';
 import './country.css';
 
 const Country = ({
   searchCountry, country, onSetCountry, onSetSearchEmpty,
 }) => {
+  const navigate = useNavigate();
+
   const showCountryFiltered = (e) => {
     const setCountry = searchCountry.filter(
       (country) => country.name.common === e.target.textContent,
@@ -16,11 +20,14 @@ const Country = ({
   };
 
   return (
-    <div>
+    <div className="Country">
+      <div className="Country__arrow">
+        <ArrowBackIcon className="Country__arrow_icon" onClick={() => navigate('/countries')} />
+      </div>
       {searchCountry.length && searchCountry.length !== 195 ? (
         <DisplayCountries name={searchCountry} showCountry={showCountryFiltered} />
       ) : (
-        <div className="Country">
+        <div>
           <img className="Country__flag" src={country.flags.png} alt="country-flag" />
           <div className="Country__assets">
             <h1 className="Country__name">{country.name.common}</h1>

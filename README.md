@@ -1,6 +1,6 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Space Travellers' Hub
+# World Countries
 
 > World Countries App works with an API which returns informations about 195 countries.
 
